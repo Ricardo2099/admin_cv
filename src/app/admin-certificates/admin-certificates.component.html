@@ -1,1 +1,23 @@
-<p>admin-certificates works!</p>
+<div class="container color-dark">
+  <div class="col">
+    <p>Elementos de certificados</p>
+  </div>
+</div>
+
+<div class="container color-light">
+  <div class="col">
+    <form>
+      <input type="text" class="txt" name="certificacion" placeholder="Certificación" [(ngModel)]="myCertificate.certificacion"><br>
+      <input type="text" class="txt" name="fechaObtencion" placeholder="Fecha de obtención" [(ngModel)]="myCertificate.fechaObtencion"><br>
+      <input type="text" class="txt" name="institucion" placeholder="Institución" [(ngModel)]="myCertificate.institucion"><br>
+      <input type="submit" class="btn" value="{{ btnTxt }}" (click)="AgregarCertificate()">
+    </form>
+  </div>
+
+  <div class="col">
+    <div class="life-container" *ngFor="let cert of certificates">
+      <input type="submit" class="btn" value="delete" (click)="deleteCertificate(cert.id)">
+      {{ cert.certificacion }} - {{ cert.institucion }} ({{ cert.fechaObtencion }})
+    </div>
+  </div>
+</div>

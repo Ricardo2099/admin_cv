@@ -1,0 +1,26 @@
+<div class="container color-dark">
+  <div class="col">
+    <p>Elementos de educación</p>
+  </div>
+</div>
+
+<div class="container color-light">
+  <div class="col">
+    <form>
+      <input type="text" class="txt" name="cursoRelevantes" placeholder="Cursos relevantes" [(ngModel)]="myEducation.cursoRelevantes"><br>
+      <input type="text" class="txt" name="gradoAcademico" placeholder="Grado académico" [(ngModel)]="myEducation.gradoAcademico"><br>
+      <input type="text" class="txt" name="institucion" placeholder="Institución" [(ngModel)]="myEducation.institucion"><br>
+      <input type="text" class="txt" name="premiosReconocimientos" placeholder="Premios y reconocimientos" [(ngModel)]="myEducation.premiosReconocimientos"><br>
+      <input type="text" class="txt" name="promedio" placeholder="Promedio" [(ngModel)]="myEducation.promedio"><br>
+      <input type="text" class="txt" name="proyectosAcademicos" placeholder="Proyectos académicos" [(ngModel)]="myEducation.proyectosAcademicos"><br>
+      <input type="submit" class="btn" value="{{ btnTxt }}" (click)="AgregarEducation()">
+    </form>
+  </div>
+
+  <div class="col">
+    <div class="life-container" *ngFor="let edu of education">
+      <input type="submit" class="btn" value="delete" (click)="deleteEducation(edu.id)">
+      {{ edu.gradoAcademico }} - {{ edu.institucion }}
+    </div>
+  </div>
+</div>

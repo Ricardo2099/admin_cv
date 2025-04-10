@@ -56,9 +56,12 @@ export class AdminWorkexperienceComponent {
 
   ActualizarWorkExperience() {
     if (!this.editingId) return;
-    this.workExperienceService.updateWorkExperience(this.editingId, this.myWorkExperience).then(() => {
-      this.resetForm();
-    });
+    const confirmacion = window.confirm('¿Estás seguro de guardar los cambios?');
+    if (confirmacion) {
+      this.workExperienceService.updateWorkExperience(this.editingId, this.myWorkExperience).then(() => {
+        this.resetForm();
+      });
+    }
   }
 
   AgregarOActualizar() {
@@ -71,9 +74,12 @@ export class AdminWorkexperienceComponent {
 
   deleteWorkExperience(id?: string) {
     if (!id) return;
-    this.workExperienceService.deleteWorkExperience(id).then(() => {
-      console.log('Work experience eliminado correctamente!');
-    });
+    const confirmacion = window.confirm('¿Estás seguro de eliminar esta experiencia laboral?');
+    if (confirmacion) {
+      this.workExperienceService.deleteWorkExperience(id).then(() => {
+        console.log('Work experience eliminado correctamente!');
+      });
+    }
   }
 
   resetForm() {

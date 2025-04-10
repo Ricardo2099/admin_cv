@@ -53,9 +53,12 @@ export class AdminLanguagesComponent {
 
   actualizarLanguage() {
     if (!this.editingId) return;
-    this.languageService.updateLanguage(this.editingId, this.myLanguage).then(() => {
-      this.resetForm();
-    });
+    const confirmacion = window.confirm('¿Estás seguro de guardar los cambios?');
+    if (confirmacion) {
+      this.languageService.updateLanguage(this.editingId, this.myLanguage).then(() => {
+        this.resetForm();
+      });
+    }
   }
 
   agregarOActualizar() {
@@ -68,9 +71,12 @@ export class AdminLanguagesComponent {
 
   eliminarLanguage(id?: string) {
     if (!id) return;
-    this.languageService.deleteLanguage(id).then(() => {
-      console.log('Idioma eliminado correctamente!');
-    });
+    const confirmacion = window.confirm('¿Estás seguro de eliminar este idioma?');
+    if (confirmacion) {
+      this.languageService.deleteLanguage(id).then(() => {
+        console.log('Idioma eliminado correctamente!');
+      });
+    }
   }
 
   resetForm() {

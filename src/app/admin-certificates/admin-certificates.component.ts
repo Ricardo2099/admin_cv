@@ -53,9 +53,12 @@ export class AdminCertificatesComponent {
 
   ActualizarCertificate() {
     if (!this.editingId) return;
-    this.certificatesService.updateCertificates(this.editingId, this.myCertificate).then(() => {
-      this.resetForm();
-    });
+    const confirmacion = window.confirm('¿Estás seguro de guardar los cambios?');
+    if (confirmacion) {
+      this.certificatesService.updateCertificates(this.editingId, this.myCertificate).then(() => {
+        this.resetForm();
+      });
+    }
   }
 
   AgregarOActualizar() {
@@ -68,9 +71,12 @@ export class AdminCertificatesComponent {
 
   deleteCertificate(id?: string) {
     if (!id) return;
-    this.certificatesService.deleteCertificates(id).then(() => {
-      console.log('Certificado eliminado correctamente!');
-    });
+    const confirmacion = window.confirm('¿Estás seguro de eliminar este certificado?');
+    if (confirmacion) {
+      this.certificatesService.deleteCertificates(id).then(() => {
+        console.log('Certificado eliminado correctamente!');
+      });
+    }
   }
 
   resetForm() {

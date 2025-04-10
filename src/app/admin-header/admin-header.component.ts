@@ -49,17 +49,21 @@ export class AdminHeaderComponent {
   }
 
   EditarHeader(header: Header) {
-    this.isEditing = true;
-    this.editingId = header.id || null;
-    this.myHeader = { ...header };
-    this.btnTxt = 'Actualizar';
+    if (confirm('¿Estás seguro de que deseas editar este encabezado?')) {
+      this.isEditing = true;
+      this.editingId = header.id || null;
+      this.myHeader = { ...header };
+      this.btnTxt = 'Actualizar';
+    }
   }
 
   ActualizarHeader() {
     if (!this.editingId) return;
-    this.headerService.updateHeader(this.editingId, this.myHeader).then(() => {
-      this.resetForm();
-    });
+    if (confirm('¿Estás seguro de que deseas guardar los cambios?')) {
+      this.headerService.updateHeader(this.editingId, this.myHeader).then(() => {
+        this.resetForm();
+      });
+    }
   }
 
   AgregarOActualizar() {
@@ -72,9 +76,11 @@ export class AdminHeaderComponent {
 
   deleteHeader(id?: string) {
     if (!id) return;
-    this.headerService.deleteHeader(id).then(() => {
-      console.log('Header eliminado correctamente!');
-    });
+    if (confirm('¿Estás seguro de que deseas eliminar este encabezado?')) {
+      this.headerService.deleteHeader(id).then(() => {
+        console.log('Header eliminado correctamente!');
+      });
+    }
   }
 
   resetForm() {

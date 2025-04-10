@@ -56,9 +56,12 @@ export class AdminEducationComponent {
 
   ActualizarEducation() {
     if (!this.editingId) return;
-    this.educationService.updateEducation(this.editingId, this.myEducation).then(() => {
-      this.resetForm();
-    });
+    const confirmacion = window.confirm('¿Estás seguro de guardar los cambios?');
+    if (confirmacion) {
+      this.educationService.updateEducation(this.editingId, this.myEducation).then(() => {
+        this.resetForm();
+      });
+    }
   }
 
   AgregarOActualizar() {
@@ -71,9 +74,12 @@ export class AdminEducationComponent {
 
   deleteEducation(id?: string) {
     if (!id) return;
-    this.educationService.deleteEducation(id).then(() => {
-      console.log('Educación eliminada correctamente!');
-    });
+    const confirmacion = window.confirm('¿Estás seguro de eliminar esta educación?');
+    if (confirmacion) {
+      this.educationService.deleteEducation(id).then(() => {
+        console.log('Educación eliminada correctamente!');
+      });
+    }
   }
 
   resetForm() {

@@ -52,9 +52,12 @@ export class AdminSkillsComponent {
 
   actualizarSkill() {
     if (!this.editingId) return;
-    this.skillService.updateSkill(this.editingId, this.mySkill).then(() => {
-      this.resetForm();
-    });
+    const confirmacion = window.confirm('¿Estás seguro de guardar los cambios?');
+    if (confirmacion) {
+      this.skillService.updateSkill(this.editingId, this.mySkill).then(() => {
+        this.resetForm();
+      });
+    }
   }
 
   agregarOActualizar() {
@@ -67,9 +70,12 @@ export class AdminSkillsComponent {
 
   eliminarSkill(id?: string) {
     if (!id) return;
-    this.skillService.deleteSkill(id).then(() => {
-      console.log('Habilidad eliminada correctamente!');
-    });
+    const confirmacion = window.confirm('¿Estás seguro de eliminar esta habilidad?');
+    if (confirmacion) {
+      this.skillService.deleteSkill(id).then(() => {
+        console.log('Habilidad eliminada correctamente!');
+      });
+    }
   }
 
   resetForm() {

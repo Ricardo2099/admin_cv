@@ -1,0 +1,58 @@
+<div class="container color-dark">
+  <div class="col">
+    <h2 class="header-title">Administrar Educación</h2>
+    <p class="header-description">Agrega, edita y elimina tus detalles educativos.</p>
+  </div>
+</div>
+
+<div class="container color-light">
+  <div class="form-container">
+    <form (ngSubmit)="AgregarOActualizar()">
+      <div class="form-group">
+        <label for="cursoRelevantes">Cursos Relevantes</label>
+        <input type="text" class="txt" name="cursoRelevantes" id="cursoRelevantes" placeholder="Cursos relevantes" [(ngModel)]="myEducation.cursoRelevantes" />
+      </div>
+
+      <div class="form-group">
+        <label for="gradoAcademico">Grado Académico</label>
+        <input type="text" class="txt" name="gradoAcademico" id="gradoAcademico" placeholder="Grado académico" [(ngModel)]="myEducation.gradoAcademico" />
+      </div>
+
+      <div class="form-group">
+        <label for="institucion">Institución</label>
+        <input type="text" class="txt" name="institucion" id="institucion" placeholder="Institución" [(ngModel)]="myEducation.institucion" />
+      </div>
+
+      <div class="form-group">
+        <label for="premiosReconocimientos">Premios y Reconocimientos</label>
+        <input type="text" class="txt" name="premiosReconocimientos" id="premiosReconocimientos" placeholder="Premios y reconocimientos" [(ngModel)]="myEducation.premiosReconocimientos" />
+      </div>
+
+      <div class="form-group">
+        <label for="promedio">Promedio</label>
+        <input type="text" class="txt" name="promedio" id="promedio" placeholder="Promedio" [(ngModel)]="myEducation.promedio" />
+      </div>
+
+      <div class="form-group">
+        <label for="proyectosAcademicos">Proyectos Académicos</label>
+        <input type="text" class="txt" name="proyectosAcademicos" id="proyectosAcademicos" placeholder="Proyectos académicos" [(ngModel)]="myEducation.proyectosAcademicos" />
+      </div>
+
+      <button type="submit" class="btn-submit">{{ btnTxt }}</button>
+    </form>
+  </div>
+
+  <div class="header-list">
+    <h3>Lista de Educación</h3>
+    <div class="header-items" *ngFor="let edu of education">
+      <div class="header-item">
+        <p><strong>{{ edu.gradoAcademico }}</strong> - {{ edu.institucion }}</p>
+        <div class="btn-group">
+          <button class="btn-edit" (click)="EditarEducation(edu)">Editar</button>
+          <button class="btn-delete" (click)="deleteEducation(edu.id)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

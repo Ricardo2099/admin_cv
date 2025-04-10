@@ -1,0 +1,57 @@
+<div class="container color-dark">
+  <div class="col">
+    <h2 class="header-title">Administrar Experiencia Laboral</h2>
+    <p class="header-description">Agrega, edita y elimina las experiencias laborales.</p>
+  </div>
+</div>
+
+<div class="container color-light">
+  <div class="form-container">
+    <form (ngSubmit)="AgregarOActualizar()">
+      <div class="form-group">
+        <label for="startDate">Fecha de inicio</label>
+        <input type="text" class="txt" name="startDate" id="startDate" placeholder="Fecha de inicio (mmm/yyyy)" [(ngModel)]="myWorkExperience.startDate" />
+      </div>
+
+      <div class="form-group">
+        <label for="endDate">Fecha de fin</label>
+        <input type="text" class="txt" name="endDate" id="endDate" placeholder="Fecha de fin (mm/yyyy)" [(ngModel)]="myWorkExperience.endDate" />
+      </div>
+
+      <div class="form-group">
+        <label for="location">Ubicación</label>
+        <input type="text" class="txt" name="location" id="location" placeholder="Ubicación (ciudad, país)" [(ngModel)]="myWorkExperience.location" />
+      </div>
+
+      <div class="form-group">
+        <label for="position">Puesto</label>
+        <input type="text" class="txt" name="position" id="position" placeholder="Puesto" [(ngModel)]="myWorkExperience.position" />
+      </div>
+
+      <div class="form-group">
+        <label for="company">Compañía</label>
+        <input type="text" class="txt" name="company" id="company" placeholder="Compañía" [(ngModel)]="myWorkExperience.company" />
+      </div>
+
+      <div class="form-group">
+        <label for="accomplishments">Logros</label>
+        <input type="text" class="txt" name="accomplishments" id="accomplishments" placeholder="Logros" [(ngModel)]="myWorkExperience.accomplishments" />
+      </div>
+
+      <button type="submit" class="btn-submit">{{ btnTxt }}</button>
+    </form>
+  </div>
+
+  <div class="header-list">
+    <h3>Lista de Experiencias Laborales</h3>
+    <div class="header-items" *ngFor="let job of workExperienceList">
+      <div class="header-item">
+        <p><strong>{{ job.position }}</strong> - {{ job.company }} - {{ job.startDate }} - {{ job.endDate }}</p>
+        <div class="btn-group">
+          <button class="btn-edit" (click)="EditarWorkExperience(job)">Editar</button>
+          <button class="btn-delete" (click)="deleteWorkExperience(job.id)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

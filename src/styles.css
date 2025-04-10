@@ -1,29 +1,146 @@
-/* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
+/* Importación de fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;700&display=swap');
 
+/* Estilos globales */
 body {
-  background: #2E9ce6;
-  padding: 3em;
-  font-family: 'Raleway', 'Arial';
+  background-color: #2E9ce6; /* Color de fondo */
+  padding: 0;
+  margin: 0;
+  font-family: 'Raleway', Arial, sans-serif; /* Fuente limpia y moderna */
   color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Centrado vertical */
+  text-align: center; /* Centrado de texto */
 }
 
+/* Estilo para el contenedor principal */
+.container {
+  background-color: #fff;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 1200px;
+  padding: 2em;
+}
+
+/* Estilos para los encabezados */
+h1, h2, h3 {
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  color: #333;
+}
+
+/* Estilos para enlaces */
+a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #ff9800; /* Color al pasar el mouse */
+}
+
+/* Lista de navegación */
 ul {
   list-style-type: none;
-  margin: 0 0 2em 0;
+  margin: 2em 0;
   padding: 0;
+  display: flex;
+  justify-content: center; /* Alineación centrada */
 }
 
 ul li {
-  display: inline;
   margin-right: 30px;
+  transition: transform 0.3s ease;
+}
+
+ul li:hover {
+  transform: scale(1.1); /* Efecto de aumento al pasar el mouse */
 }
 
 ul li a {
   font-size: 1.5em;
+  color: #fff;
+  transition: color 0.3s ease;
 }
 
-a {
-  color: #fff;
-  text-decoration: none;
+/* Estilos para el formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  align-items: center;
+  padding: 2em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"] {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus {
+  border-color: #2E9ce6; /* Color del borde al enfocar el input */
+}
+
+/* Estilo para los botones */
+button {
+  background-color: #4CAF50; /* Botón verde */
+  color: white;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049; /* Efecto hover en el botón */
+}
+
+/* Estilos para las tarjetas de contenido */
+.card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 15px 0;
+}
+
+.card h4 {
+  margin-bottom: 1em;
+  color: #333;
+}
+
+.card p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Animaciones y transiciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in;
 }

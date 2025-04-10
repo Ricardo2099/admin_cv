@@ -1,1 +1,62 @@
-<p>admin-header works!</p>
+<div class="container color-dark">
+  <div class="col">
+    <h2 class="header-title">Administrar Encabezado</h2>
+    <p class="header-description">Agrega, edita y elimina la información de tu encabezado.</p>
+  </div>
+</div>
+
+<div class="container color-light">
+  <div class="form-container">
+    <form (ngSubmit)="AgregarOActualizar()">
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" class="txt" name="name" id="name" placeholder="Nombre" [(ngModel)]="myHeader.name" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="txt" name="email" id="email" placeholder="Email" [(ngModel)]="myHeader.email" />
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">Teléfono</label>
+        <input type="text" class="txt" name="phoneNumber" id="phoneNumber" placeholder="Teléfono" [(ngModel)]="myHeader.phoneNumber" />
+      </div>
+
+      <div class="form-group">
+        <label for="location">Ubicación</label>
+        <input type="text" class="txt" name="location" id="location" placeholder="Ubicación" [(ngModel)]="myHeader.location" />
+      </div>
+
+      <div class="form-group">
+        <label for="photoUrl">URL Foto</label>
+        <input type="text" class="txt" name="photoUrl" id="photoUrl" placeholder="URL Foto" [(ngModel)]="myHeader.photoUrl" />
+      </div>
+
+      <div class="form-group">
+        <label for="socialNetwork">Red Social</label>
+        <input type="text" class="txt" name="socialNetwork" id="socialNetwork" placeholder="Red Social" [(ngModel)]="myHeader.socialNetwork" />
+      </div>
+
+      <div class="form-group">
+        <label for="goalLife">Meta de vida</label>
+        <input type="text" class="txt" name="goalLife" id="goalLife" placeholder="Meta de vida" [(ngModel)]="myHeader.goalLife" />
+      </div>
+
+      <button type="submit" class="btn-submit">{{ btnTxt }}</button>
+    </form>
+  </div>
+
+  <div class="header-list">
+    <h3>Lista de Encabezados</h3>
+    <div class="header-items" *ngFor="let h of headers">
+      <div class="header-item">
+        <p><strong>{{ h.name }}</strong> - {{ h.email }} - {{ h.phoneNumber }}</p>
+        <div class="btn-group">
+          <button class="btn-edit" (click)="EditarHeader(h)">Editar</button>
+          <button class="btn-delete" (click)="deleteHeader(h.id)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

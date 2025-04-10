@@ -1,1 +1,29 @@
-<p>admin-interests works!</p>
+<div class="container color-dark">
+  <div class="col">
+    <p>Elementos de intereses</p>
+  </div>
+</div>
+
+<div class="container color-light">
+  <div class="col">
+    <form>
+      <input type="text" class="txt" name="actividadesExtracurriculares" placeholder="Actividades Extracurriculares" [(ngModel)]="myInterest.actividadesExtracurriculares"><br>
+      <input type="text" class="txt" name="culturalEventos" placeholder="Eventos Culturales" [(ngModel)]="myInterest.culturalEventos"><br>
+      <input type="text" class="txt" name="deportes" placeholder="Deportes" [(ngModel)]="myInterest.deportes"><br>
+      <input type="text" class="txt" name="hobbiesActividades" placeholder="Hobbies / Actividades" [(ngModel)]="myInterest.hobbiesActividades"><br>
+      <input type="text" class="txt" name="interesesProfesionales" placeholder="Intereses Profesionales" [(ngModel)]="myInterest.interesesProfesionales"><br>
+      <input type="submit" class="btn" value="{{ btnTxt }}" (click)="AgregarInterest()">
+    </form>
+  </div>
+
+  <div class="col">
+    <div class="life-container" *ngFor="let interest of interests">
+      <input type="submit" class="btn" value="delete" (click)="deleteInterest(interest.id)">
+      {{ interest.actividadesExtracurriculares }} | 
+      {{ interest.culturalEventos }} | 
+      {{ interest.deportes }} | 
+      {{ interest.hobbiesActividades }} | 
+      {{ interest.interesesProfesionales }}
+    </div>
+  </div>
+</div>

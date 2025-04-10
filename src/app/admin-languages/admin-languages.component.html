@@ -1,1 +1,23 @@
-<p>admin-languages works!</p>
+<div class="container color-dark">
+  <div class="col">
+    <p>Elementos de idiomas</p>
+  </div>
+</div>
+
+<div class="container color-light">
+  <div class="col">
+    <form>
+      <input type="text" class="txt" name="certificacionesOPruebasdeldioma" placeholder="Certificaciones (ej: TOEFL)" [(ngModel)]="myLanguage.certificacionesOPruebasdeldioma"><br>
+      <input type="text" class="txt" name="idioma" placeholder="Idioma (ej: inglés)" [(ngModel)]="myLanguage.idioma"><br>
+      <input type="text" class="txt" name="nivelDeCompetencia" placeholder="Nivel (ej: básico)" [(ngModel)]="myLanguage.nivelDeCompetencia"><br>
+      <input type="submit" class="btn" value="{{ btnTxt }}" (click)="agregarLanguage()">
+    </form>
+  </div>
+
+  <div class="col">
+    <div class="life-container" *ngFor="let lang of languages">
+      <input type="submit" class="btn" value="delete" (click)="eliminarLanguage(lang.id)">
+      <strong>{{ lang.idioma }}</strong> - {{ lang.certificacionesOPruebasdeldioma }} ({{ lang.nivelDeCompetencia }})
+    </div>
+  </div>
+</div>

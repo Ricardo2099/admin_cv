@@ -1,1 +1,23 @@
-<p>admin-skills works!</p>
+<div class="container color-dark">
+  <div class="col">
+    <p>Elementos de habilidades</p>
+  </div>
+</div>
+
+<div class="container color-light">
+  <div class="col">
+    <form>
+      <input type="text" class="txt" name="skillsPrograming" placeholder="Habilidades de programación (ej: java.python.c++)" [(ngModel)]="mySkill.skillsPrograming"><br>
+      <input type="text" class="txt" name="socialSkills" placeholder="Habilidades sociales (ej: asertividad.trabajo en equipo)" [(ngModel)]="mySkill.socialSkills"><br>
+      <input type="submit" class="btn" value="{{ btnTxt }}" (click)="agregarSkill()">
+    </form>
+  </div>
+
+  <div class="col">
+    <div class="life-container" *ngFor="let skill of skills">
+      <input type="submit" class="btn" value="delete" (click)="eliminarSkill(skill.id)">
+      <strong>Programación:</strong> {{ skill.skillsPrograming }}<br>
+      <strong>Sociales:</strong> {{ skill.socialSkills }}
+    </div>
+  </div>
+</div>

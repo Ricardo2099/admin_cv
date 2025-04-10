@@ -1,23 +1,37 @@
 <div class="container color-dark">
   <div class="col">
-    <p>Elementos de habilidades</p>
+    <h2 class="header-title">Administrar Habilidades</h2>
+    <p class="header-description">Agrega, edita y elimina tus habilidades.</p>
   </div>
 </div>
 
 <div class="container color-light">
-  <div class="col">
-    <form>
-      <input type="text" class="txt" name="skillsPrograming" placeholder="Habilidades de programación (ej: java.python.c++)" [(ngModel)]="mySkill.skillsPrograming"><br>
-      <input type="text" class="txt" name="socialSkills" placeholder="Habilidades sociales (ej: asertividad.trabajo en equipo)" [(ngModel)]="mySkill.socialSkills"><br>
-      <input type="submit" class="btn" value="{{ btnTxt }}" (click)="agregarSkill()">
+  <div class="form-container">
+    <form (ngSubmit)="agregarOActualizar()">
+      <div class="form-group">
+        <label for="skillsPrograming">Habilidades de Programación</label>
+        <input type="text" class="txt" name="skillsPrograming" id="skillsPrograming" placeholder="Ej: Java, Python, C++" [(ngModel)]="mySkill.skillsPrograming" />
+      </div>
+
+      <div class="form-group">
+        <label for="socialSkills">Habilidades Sociales</label>
+        <input type="text" class="txt" name="socialSkills" id="socialSkills" placeholder="Ej: Asertividad, Trabajo en equipo" [(ngModel)]="mySkill.socialSkills" />
+      </div>
+
+      <button type="submit" class="btn-submit">{{ btnTxt }}</button>
     </form>
   </div>
 
-  <div class="col">
-    <div class="life-container" *ngFor="let skill of skills">
-      <input type="submit" class="btn" value="delete" (click)="eliminarSkill(skill.id)">
-      <strong>Programación:</strong> {{ skill.skillsPrograming }}<br>
-      <strong>Sociales:</strong> {{ skill.socialSkills }}
+  <div class="header-list">
+    <h3>Lista de Habilidades</h3>
+    <div class="header-items" *ngFor="let skill of skills">
+      <div class="header-item">
+        <p><strong>Programación:</strong> {{ skill.skillsPrograming }} | <strong>Sociales:</strong> {{ skill.socialSkills }}</p>
+        <div class="btn-group">
+          <button class="btn-edit" (click)="editarSkill(skill)">Editar</button>
+          <button class="btn-delete" (click)="eliminarSkill(skill.id)">Eliminar</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

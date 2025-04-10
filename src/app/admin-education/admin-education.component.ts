@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { EducationService } from '../services/education-service/education.service';
 import { Education } from '../models/education/education.model';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-education',
@@ -11,6 +11,9 @@ import { map } from 'rxjs/operators';
 export class AdminEducationComponent {
   itemTitle = 'Agregar';
   btnTxt = 'Agregar';
+  isEditing = false;
+  editingId: string | null = null;
+
   myEducation: Education = {
     cursoRelevantes: '',
     gradoAcademico: '',
@@ -19,41 +22,71 @@ export class AdminEducationComponent {
     promedio: '',
     proyectosAcademicos: ''
   };
+
   education?: Education[];
 
   constructor(public educationService: EducationService) {
     this.educationService.getEducation()
       .snapshotChanges()
       .pipe(
-        map(changes =>
-          changes.map(c => ({
+        map((changes: any[]) =>
+          changes.map((c: any) => ({
             id: c.payload.doc.id,
             ...c.payload.doc.data() as Education
           }))
         )
       )
-      .subscribe(data => {
+      .subscribe((data: Education[]) => {
         this.education = data;
       });
   }
 
   AgregarEducation() {
     this.educationService.createEducation(this.myEducation).then(() => {
-      this.myEducation = {
-        cursoRelevantes: '',
-        gradoAcademico: '',
-        institucion: '',
-        premiosReconocimientos: '',
-        promedio: '',
-        proyectosAcademicos: ''
-      };
+      this.resetForm();
     });
+  }
+
+  EditarEducation(education: Education) {
+    this.isEditing = true;
+    this.editingId = education.id || null;
+    this.myEducation = { ...education };
+    this.btnTxt = 'Actualizar';
+  }
+
+  ActualizarEducation() {
+    if (!this.editingId) return;
+    this.educationService.updateEducation(this.editingId, this.myEducation).then(() => {
+      this.resetForm();
+    });
+  }
+
+  AgregarOActualizar() {
+    if (this.isEditing) {
+      this.ActualizarEducation();
+    } else {
+      this.AgregarEducation();
+    }
   }
 
   deleteEducation(id?: string) {
     if (!id) return;
     this.educationService.deleteEducation(id).then(() => {
-      console.log('Item eliminado correctamente!');
+      console.log('Educación eliminada correctamente!');
     });
+  }
+
+  resetForm() {
+    this.myEducation = {
+      cursoRelevantes: '',
+      gradoAcademico: '',
+      institucion: '',
+      premiosReconocimientos: '',
+      promedio: '',
+      proyectosAcademicos: ''
+    };
+    this.isEditing = false;
+    this.editingId = null;
+    this.btnTxt = 'Agregar';
   }
 }

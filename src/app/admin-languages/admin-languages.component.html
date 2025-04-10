@@ -1,23 +1,42 @@
 <div class="container color-dark">
   <div class="col">
-    <p>Elementos de idiomas</p>
+    <h2 class="header-title">Administrar Idiomas</h2>
+    <p class="header-description">Agrega, edita y elimina tus idiomas y sus detalles.</p>
   </div>
 </div>
 
 <div class="container color-light">
-  <div class="col">
-    <form>
-      <input type="text" class="txt" name="certificacionesOPruebasdeldioma" placeholder="Certificaciones (ej: TOEFL)" [(ngModel)]="myLanguage.certificacionesOPruebasdeldioma"><br>
-      <input type="text" class="txt" name="idioma" placeholder="Idioma (ej: inglés)" [(ngModel)]="myLanguage.idioma"><br>
-      <input type="text" class="txt" name="nivelDeCompetencia" placeholder="Nivel (ej: básico)" [(ngModel)]="myLanguage.nivelDeCompetencia"><br>
-      <input type="submit" class="btn" value="{{ btnTxt }}" (click)="agregarLanguage()">
+  <div class="form-container">
+    <form (ngSubmit)="agregarOActualizar()">
+      <div class="form-group">
+        <label for="certificacionesOPruebasdeldioma">Certificaciones o Pruebas de Idioma</label>
+        <input type="text" class="txt" name="certificacionesOPruebasdeldioma" id="certificacionesOPruebasdeldioma" placeholder="Ej: TOEFL" [(ngModel)]="myLanguage.certificacionesOPruebasdeldioma" />
+      </div>
+
+      <div class="form-group">
+        <label for="idioma">Idioma</label>
+        <input type="text" class="txt" name="idioma" id="idioma" placeholder="Ej: Inglés" [(ngModel)]="myLanguage.idioma" />
+      </div>
+
+      <div class="form-group">
+        <label for="nivelDeCompetencia">Nivel de Competencia</label>
+        <input type="text" class="txt" name="nivelDeCompetencia" id="nivelDeCompetencia" placeholder="Ej: Básico" [(ngModel)]="myLanguage.nivelDeCompetencia" />
+      </div>
+
+      <button type="submit" class="btn-submit">{{ btnTxt }}</button>
     </form>
   </div>
 
-  <div class="col">
-    <div class="life-container" *ngFor="let lang of languages">
-      <input type="submit" class="btn" value="delete" (click)="eliminarLanguage(lang.id)">
-      <strong>{{ lang.idioma }}</strong> - {{ lang.certificacionesOPruebasdeldioma }} ({{ lang.nivelDeCompetencia }})
+  <div class="header-list">
+    <h3>Lista de Idiomas</h3>
+    <div class="header-items" *ngFor="let lang of languages">
+      <div class="header-item">
+        <p><strong>{{ lang.idioma }}</strong> | <strong>Certificaciones:</strong> {{ lang.certificacionesOPruebasdeldioma }} | <strong>Nivel:</strong> {{ lang.nivelDeCompetencia }}</p>
+        <div class="btn-group">
+          <button class="btn-edit" (click)="editarLanguage(lang)">Editar</button>
+          <button class="btn-delete" (click)="eliminarLanguage(lang.id)">Eliminar</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

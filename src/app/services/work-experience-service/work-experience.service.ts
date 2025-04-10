@@ -17,8 +17,12 @@ export class WorkExperienceService {
     return this.workExperienceRef;
   }
 
-  createWorkExperience(myJob: WorkExperience): any {
-    return this.workExperienceRef.add({ ...myJob });
+  createWorkExperience(workExperience: WorkExperience): any {
+    return this.workExperienceRef.add({ ...workExperience });
+  }
+
+  updateWorkExperience(id: string, data: WorkExperience): Promise<void> {
+    return this.workExperienceRef.doc(id).update({ ...data });
   }
 
   deleteWorkExperience(id: string): Promise<void> {

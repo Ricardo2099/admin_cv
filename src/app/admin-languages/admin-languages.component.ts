@@ -11,11 +11,15 @@ import { LanguageService } from '../services/languages-service/language.service'
 export class AdminLanguagesComponent {
   itemTitle = 'Agregar';
   btnTxt = 'Agregar';
+  isEditing = false;
+  editingId: string | null = null;
+
   myLanguage: Language = {
     certificacionesOPruebasdeldioma: '',
     idioma: '',
     nivelDeCompetencia: ''
   };
+
   languages?: Language[];
 
   constructor(public languageService: LanguageService) {
@@ -36,18 +40,47 @@ export class AdminLanguagesComponent {
 
   agregarLanguage() {
     this.languageService.createLanguage(this.myLanguage).then(() => {
-      this.myLanguage = {
-        certificacionesOPruebasdeldioma: '',
-        idioma: '',
-        nivelDeCompetencia: ''
-      };
+      this.resetForm();
     });
+  }
+
+  editarLanguage(language: Language) {
+    this.isEditing = true;
+    this.editingId = language.id || null;
+    this.myLanguage = { ...language };
+    this.btnTxt = 'Actualizar';
+  }
+
+  actualizarLanguage() {
+    if (!this.editingId) return;
+    this.languageService.updateLanguage(this.editingId, this.myLanguage).then(() => {
+      this.resetForm();
+    });
+  }
+
+  agregarOActualizar() {
+    if (this.isEditing) {
+      this.actualizarLanguage();
+    } else {
+      this.agregarLanguage();
+    }
   }
 
   eliminarLanguage(id?: string) {
     if (!id) return;
     this.languageService.deleteLanguage(id).then(() => {
-      console.log('Item eliminado correctamente!');
+      console.log('Idioma eliminado correctamente!');
     });
+  }
+
+  resetForm() {
+    this.myLanguage = {
+      certificacionesOPruebasdeldioma: '',
+      idioma: '',
+      nivelDeCompetencia: ''
+    };
+    this.isEditing = false;
+    this.editingId = null;
+    this.btnTxt = 'Agregar';
   }
 }

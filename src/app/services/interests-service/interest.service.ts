@@ -1,3 +1,4 @@
+// interest.service.ts
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Interest } from '../../models/interests/interests.model';
@@ -23,5 +24,9 @@ export class InterestService {
 
   deleteInterest(id: string): Promise<void> {
     return this.interestsRef.doc(id).delete();
+  }
+
+  updateInterest(id: string, interest: Interest): Promise<void> {
+    return this.interestsRef.doc(id).update({ ...interest });
   }
 }

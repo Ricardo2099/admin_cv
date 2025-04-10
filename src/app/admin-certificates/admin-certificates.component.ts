@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Certificate } from '../models/certificates/certificates.model';
 import { map } from 'rxjs/operators';
 import { CertificatesService } from '../services/certificates-service/certificate.service';
+import { Certificate } from '../models/certificates/certificates.model';
 
 @Component({
   selector: 'app-admin-certificates',
@@ -11,11 +11,15 @@ import { CertificatesService } from '../services/certificates-service/certificat
 export class AdminCertificatesComponent {
   itemTitle = 'Agregar';
   btnTxt = 'Agregar';
+  isEditing = false;
+  editingId: string | null = null;
+
   myCertificate: Certificate = {
     certificacion: '',
     fechaObtencion: '',
     institucion: ''
   };
+
   certificates?: Certificate[];
 
   constructor(public certificatesService: CertificatesService) {
@@ -36,18 +40,47 @@ export class AdminCertificatesComponent {
 
   AgregarCertificate() {
     this.certificatesService.createCertificates(this.myCertificate).then(() => {
-      this.myCertificate = {
-        certificacion: '',
-        fechaObtencion: '',
-        institucion: ''
-      };
+      this.resetForm();
     });
+  }
+
+  EditarCertificate(certificate: Certificate) {
+    this.isEditing = true;
+    this.editingId = certificate.id || null;
+    this.myCertificate = { ...certificate };
+    this.btnTxt = 'Actualizar';
+  }
+
+  ActualizarCertificate() {
+    if (!this.editingId) return;
+    this.certificatesService.updateCertificates(this.editingId, this.myCertificate).then(() => {
+      this.resetForm();
+    });
+  }
+
+  AgregarOActualizar() {
+    if (this.isEditing) {
+      this.ActualizarCertificate();
+    } else {
+      this.AgregarCertificate();
+    }
   }
 
   deleteCertificate(id?: string) {
     if (!id) return;
     this.certificatesService.deleteCertificates(id).then(() => {
-      console.log('Item eliminado correctamente!');
+      console.log('Certificado eliminado correctamente!');
     });
+  }
+
+  resetForm() {
+    this.myCertificate = {
+      certificacion: '',
+      fechaObtencion: '',
+      institucion: ''
+    };
+    this.isEditing = false;
+    this.editingId = null;
+    this.btnTxt = 'Agregar';
   }
 }

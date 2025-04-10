@@ -21,6 +21,10 @@ export class EducationService {
     return this.educationRef.add({ ...education });
   }
 
+  updateEducation(id: string, data: Education): Promise<void> {
+    return this.educationRef.doc(id).update({ ...data });
+  }
+
   deleteEducation(id: string): Promise<void> {
     return this.educationRef.doc(id).delete();
   }

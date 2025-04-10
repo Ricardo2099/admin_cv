@@ -11,10 +11,14 @@ import { SkillService } from '../services/skills-service/skill.service';
 export class AdminSkillsComponent {
   itemTitle = 'Agregar';
   btnTxt = 'Agregar';
+  isEditing = false;
+  editingId: string | null = null;
+
   mySkill: Skill = {
     skillsPrograming: '',
     socialSkills: ''
   };
+
   skills?: Skill[];
 
   constructor(public skillService: SkillService) {
@@ -35,17 +39,46 @@ export class AdminSkillsComponent {
 
   agregarSkill() {
     this.skillService.createSkill(this.mySkill).then(() => {
-      this.mySkill = {
-        skillsPrograming: '',
-        socialSkills: ''
-      };
+      this.resetForm();
     });
+  }
+
+  editarSkill(skill: Skill) {
+    this.isEditing = true;
+    this.editingId = skill.id || null;
+    this.mySkill = { ...skill };
+    this.btnTxt = 'Actualizar';
+  }
+
+  actualizarSkill() {
+    if (!this.editingId) return;
+    this.skillService.updateSkill(this.editingId, this.mySkill).then(() => {
+      this.resetForm();
+    });
+  }
+
+  agregarOActualizar() {
+    if (this.isEditing) {
+      this.actualizarSkill();
+    } else {
+      this.agregarSkill();
+    }
   }
 
   eliminarSkill(id?: string) {
     if (!id) return;
     this.skillService.deleteSkill(id).then(() => {
-      console.log('Item eliminado correctamente!');
+      console.log('Habilidad eliminada correctamente!');
     });
+  }
+
+  resetForm() {
+    this.mySkill = {
+      skillsPrograming: '',
+      socialSkills: ''
+    };
+    this.isEditing = false;
+    this.editingId = null;
+    this.btnTxt = 'Agregar';
   }
 }
